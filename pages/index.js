@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export async function getStaticProps({ locale }) {
   return {
@@ -65,11 +66,11 @@ const Home = () => {
   };
 
   return (
-    <Layout>
+    <>
+      <LanguageSwitcher />
       <Title>{t('welcome')}</Title>
       <Button onClick={createGame}>{t('createGame')}</Button>
-      <h1>gameCode: {gameCode}</h1>
-    </Layout>
+    </>
   );
 };
 

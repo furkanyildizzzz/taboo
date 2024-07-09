@@ -10,7 +10,6 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <LanguageSwitcher />
       <Component {...pageProps} />
     </Layout>
   );

@@ -20,7 +20,7 @@ const NewGame = () => {
   };
 
   const goToMainMenu = () => {
-    route.back();
+    route.push('/');
   };
 
   const handleSubmit = (e) => {
