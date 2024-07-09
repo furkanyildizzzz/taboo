@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
+import DummyCard from '@/components/DummyCard';
+import Card from '@/components/Card';
 
 export async function getStaticProps({ locale }) {
   return {
@@ -68,8 +70,15 @@ const Home = () => {
   return (
     <>
       <LanguageSwitcher />
-      <Title>{t('welcome')}</Title>
-      <Button onClick={createGame}>{t('createGame')}</Button>
+      <Header title={'welcome'}>
+        The team game that’s all about what you{' '}
+        <span className="sc-AxheI eHEBtw">say,</span> and what you{' '}
+        <span className="sc-AxheI eHEBtw">don’t!</span>
+      </Header>
+      <Card />
+      <DummyCard order={1} />
+      <DummyCard order={2} />
+      <DummyCard order={3} />
     </>
   );
 };
