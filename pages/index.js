@@ -4,6 +4,16 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+    },
+  };
+}
 
 const Button = styled.button`
   width: 100%;
@@ -28,6 +38,7 @@ const Title = styled.h1`
 `;
 
 const Home = () => {
+  const { t } = useTranslation('common');
   const [gameCode, setGameCode] = useState('');
 
   const router = useRouter();
@@ -35,9 +46,10 @@ const Home = () => {
   const createGame = () => {
     // Generate a unique game code (example: randomly generated code)
     const newGameCode = generateGameCode();
-    setGameCode(newGameCode);
+    // setGameCode(newGameCode);
     // Navigate to the new game page with the generated code
     //router.push(`/game/${newGameCode}`);
+    router.push(`/game/create`);
   };
 
   const generateGameCode = () => {
@@ -54,8 +66,8 @@ const Home = () => {
 
   return (
     <Layout>
-      <Title>Welcome to Taboo Game!</Title>
-      <Button onClick={createGame}>Create Game</Button>
+      <Title>{t('welcome')}</Title>
+      <Button onClick={createGame}>{t('createGame')}</Button>
       <h1>gameCode: {gameCode}</h1>
     </Layout>
   );
