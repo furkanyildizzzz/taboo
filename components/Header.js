@@ -24,6 +24,9 @@ const HeaderStyles = styled.header`
     color: rgb(117, 117, 117);
     background-color: rgba(247, 249, 249, 0.5);
     line-height: 1.3;
+    span {
+      color: rgb(25, 130, 196);
+    }
   }
 `;
 

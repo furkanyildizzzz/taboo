@@ -10,7 +10,7 @@ const CardStyles = styled.div`
   background-color: currentcolor;
   color: rgb(25, 130, 196);
 
-  ::before {
+  &:before {
     z-index: -1;
     position: absolute;
     content: '';

@@ -34,7 +34,7 @@ const CardStyles = styled.div`
       transform: translate(-50%, -50%) rotate(-5deg);
     `}
 
-  ::after {
+  &:after {
     display: inline-block;
     content: '';
     position: absolute;

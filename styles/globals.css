@@ -1,0 +1,23 @@
+html {
+    font-size: 62.5%;
+    display: block;
+}
+
+head{
+    display: none;
+}
+
+body{
+    box-sizing: border-box;
+    font-family: Roboto, Arial;
+    line-height: 1.4;
+    min-height: 100vh;
+    max-width: 100vw;
+    display: block;
+}
+
+*, *:after, *:before {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: inherit;
+}
