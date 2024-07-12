@@ -3,6 +3,7 @@
   "createGame": "Oyun Oluştur",
   "gameCode": "Oyun Kodu",
   "fullname": "Adınız",
+  "new-game": "Yeni Oyun",
   "rules": [
     {
       "title": "Kurulum",

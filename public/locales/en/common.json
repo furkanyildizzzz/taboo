@@ -3,6 +3,7 @@
   "createGame": "Create Game",
   "gameCode": "Game Code",
   "fullname": "Your Name",
+  "new-game": "New Game",
   "rules": [
     {
       "title": "Setup",
