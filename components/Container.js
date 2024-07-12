@@ -15,7 +15,7 @@ const ContainerStyles = styled.div.attrs({ className: 'layout' })`
     content: '';
     height: 100%;
     width: 100%;
-    background-image: url('http://localhost:3000/public/images/pattern-light.png');
+    background-image: url('/public/images/pattern-light.png');
     opacity: 0.6;
     position: absolute;
     top: 0px;

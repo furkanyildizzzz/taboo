@@ -2,13 +2,11 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Header from '@/components/Header';
-import DummyCard from '@/components/DummyCard';
-import Card from '@/components/Card';
+import MainMenu from '@/components/MainMenu';
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export async function getStaticProps({ locale }) {
   return {
@@ -18,30 +16,7 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-const Button = styled.button`
-  width: 100%;
-  background-color: #3b82f6; /* Blue background */
-  color: white;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #2563eb; /* Darker blue on hover */
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
-
 const Home = () => {
-  const { t } = useTranslation('common');
   const [gameCode, setGameCode] = useState('');
 
   const router = useRouter();
@@ -75,10 +50,7 @@ const Home = () => {
         <span className="sc-AxheI eHEBtw">say,</span> and what you{' '}
         <span className="sc-AxheI eHEBtw">don’t!</span>
       </Header>
-      <Card />
-      <DummyCard order={1} />
-      <DummyCard order={2} />
-      <DummyCard order={3} />
+      <MainMenu />
     </>
   );
 };

@@ -1,7 +1,44 @@
 {
-    "welcome": "Taboo",
-    "createGame": "Oyun Oluştur",
-    "gameCode": "Oyun Kodu",
-    "fullname": "Adınız"
-  }
-  
+  "welcome": "Taboo",
+  "createGame": "Oyun Oluştur",
+  "gameCode": "Oyun Kodu",
+  "fullname": "Adınız",
+  "rules": [
+    {
+      "title": "Kurulum",
+      "text": [
+        "Taboo, arkadaşlarınızla birlikte olduğunuzda veya Google Meets, Zoom, Skype gibi platformları kullanarak sanal olarak oynayabileceğiniz 4-10 kişilik bir takım oyunudur.",
+        "Yeni bir oyun oluşturulduktan sonra, oyun kodunu kullanarak katılın, bir takım seçin ve eğlenceye başlayın."
+      ]
+    },
+    {
+      "title": "İpucu Veren",
+      "text": [
+        "Her turda bir ipucu veren seçilir. İpucu veren, kartın üst kısmında bir kelime ve altında bir kelime listesi bulunan bir kart görür.",
+        "Amaç, takımınıza üstteki kelimeyi, yasaklı kelimeleri söylemeden tanımlayarak buldurmaktır."
+      ]
+    },
+    {
+      "title": "İpucu Veren (devam)",
+      "text": [
+        "İpucu veren, karttaki kelimelerin hiçbir kısmını söyleyemez. Örneğin, tahmin edilmesi gereken kelime 'mikrodalga' ise ipucu veren mikro, mikrofon, dalga gibi kelimeleri söyleyemez.",
+        "İpucu veren 'şununla kafiyeli' veya 'şuna benziyor' gibi ipuçları kullanamaz. Aksesuarlar veya nesnelere işaret etmek yasaktır."
+      ]
+    },
+    {
+      "title": "Gözlemci",
+      "text": [
+        "Diğer takımdan bir gözlemci seçilir ve o da yasaklı kartı görebilir. İpucu veren yasaklı bir şey söyler veya yaparsa, gözlemci Buzzer düğmesine basarak ipucu verenin bir sonraki karta geçmesini sağlar.",
+        "Gözlemcinin takım arkadaşları, ipucu verenin takımına tahmin yapmamalı veya yardım etmemelidir."
+      ]
+    },
+    {
+      "title": "Puanlama",
+      "text": [
+        "Her turdan sonra gözlemci kartları gözden geçirir ve her birinin doğru yığında olduğundan emin olur: doğru, atlanan veya atılan.",
+        "Doğru kartlar, ipucu veren takım için bir puan değerindedir. Atlanan kartlar gözlemci takım için 0, ½ veya 1 puan değerindedir ve atılan kartlar 0 puan değerindedir.",
+        "Her oyuncu belirli bir sayıda ipucu veren olduğunda veya tüm kartlar oynandığında oyun sona erer. En çok puana sahip takım kazanır!"
+      ]
+    }
+  ]
+}
