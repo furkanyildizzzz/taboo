@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+logs/
+
+# MacOS
+.DS_Store
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierignore
+prettier.config.js
+
+# VS Code
+.vscode/
