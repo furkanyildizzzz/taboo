@@ -60,28 +60,8 @@ const SecondDiv = styled.div`
   }
 `;
 
-const Card = () => {
-  return (
-    <CardStyles>
-      <FirstDiv>Menu</FirstDiv>
-      <SecondDiv>
-        <ul>
-          <li>
-            <Link href={`/game/create`}>Create New Game</Link>
-          </li>
-          <li>
-            <Link href={`/game/join`}>Join Game</Link>
-          </li>
-          <li>
-            <Link href={`/howToPlay`}>How To Play</Link>
-          </li>
-          <li>
-            <Link href={`/card/submit`}>Submit a Card</Link>
-          </li>
-        </ul>
-      </SecondDiv>
-    </CardStyles>
-  );
+const Card = ({ children }) => {
+  return <CardStyles>{children}</CardStyles>;
 };
 
 export default Card;

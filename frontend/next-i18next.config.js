@@ -5,6 +5,7 @@ module.exports = {
     defaultLocale: 'tr',
     locales: ['en', 'tr'],
   },
+  returnObjects: true,
   fallbackLng: {
     default: ['tr'],
   },
