@@ -87,7 +87,7 @@ const NewGame = () => {
 
             <SelectInput
               labelText={'Turns per Person'}
-              name={'turnsValue'}
+              name={'gameTurn'}
               tabindex={'4'}
               onChange={handleChange}
               options={[
@@ -102,7 +102,7 @@ const NewGame = () => {
 
             <SelectInput
               labelText={'Timer'}
-              name={'timeValue'}
+              name={'gameTime'}
               tabindex={'4'}
               onChange={handleChange}
               options={[
@@ -116,7 +116,7 @@ const NewGame = () => {
 
             <SelectInput
               labelText={'Teams'}
-              name={'teamsValue'}
+              name={'gameTeam'}
               tabindex={'4'}
               onChange={handleChange}
               options={[
