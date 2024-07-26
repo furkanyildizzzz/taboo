@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Player } from './Player';
 
 @Entity('games')
 export class Game {
@@ -16,4 +23,8 @@ export class Game {
 
   @Column()
   gameTeam: number;
+
+  @OneToOne(() => Player, (player) => player.game)
+  @JoinColumn()
+  owner: Player;
 }
