@@ -20,5 +20,5 @@ export class Player {
 
   @OneToOne(() => Game, (game) => game.gameCode)
   @JoinColumn()
-  game: string;
+  game: Game;
 }
