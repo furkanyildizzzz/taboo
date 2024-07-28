@@ -12,18 +12,13 @@ export abstract class ApiError extends Error {
     }
     this.name = this.constructor.name;
   }
-
   abstract serializeErrors(): { message: string; field?: string }[];
 
   // Method to generate the complete error response
-  toErrorResponse() {
-    return {
-      success: false,
-      errors: this.serializeErrors().map((error) => ({
-        name: this.name,
-        ...error,
-      })),
-      stack: this.stack,
-    };
-  }
+  toErrorResponse = () => {
+    return this.serializeErrors().map((error) => ({
+      name: this.name,
+      ...error,
+    }));
+  };
 }
