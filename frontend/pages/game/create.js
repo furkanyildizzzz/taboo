@@ -13,6 +13,7 @@ import Label from '@/components/Label';
 import styled from 'styled-components';
 import Form from '@/components/Form';
 import SelectInput from '@/components/SelectInput';
+import axios from 'axios';
 
 const DivStyles = styled.div`
   margin-bottom: 1.5rem;
@@ -30,33 +31,61 @@ export async function getStaticProps({ locale }) {
 const NewGame = () => {
   const { t } = useTranslation('common');
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    gameTurn: 2,
+    gameTime: 60,
+    gameTeam: 2,
+  });
   const [errors, setErrors] = useState({});
-  const route = useRouter();
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const goToMainMenu = () => {
-    route.push('/');
+    router.push('/');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    validateInput();
+    if (!validateInput()) return false;
+
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:4000/api/game/create/',
+        {
+          ...formData,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+      if (response.status === 201) {
+        const { gameCode } = response.data;
+        router.push(`/game/${gameCode}`);
+      }
+    } catch (error) {
+      console.error('Failed to create game:', error);
+      setErrors(error);
+    }
   };
 
   const validateInput = () => {
     setErrors({});
+    let isvalid = true;
     if (!formData.fullname) {
       setErrors((prev) => {
         return { ...prev, fullname: 'Name is required' };
       });
-    } else if (formData.fullname.length > 15)
+      isvalid = false;
+    } else if (formData.fullname.length > 15) {
       setErrors((prev) => {
         return { ...prev, fullname: 'Name must be at max 15 length' };
       });
+      isvalid = false;
+    }
+    return isvalid;
   };
   return (
     <Form>
@@ -77,9 +106,9 @@ const NewGame = () => {
           <DivStyles>
             <p
               style={{
-                'font-size': '2rem',
-                'font-weight': '500',
-                'text-align': 'center',
+                fontSize: '2rem',
+                fontWWeight: '500',
+                textAlign: 'center',
               }}
             >
               End Game Method

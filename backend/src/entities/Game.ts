@@ -27,4 +27,15 @@ export class Game {
   @OneToOne(() => Player, (player) => player.game)
   @JoinColumn()
   owner: Player;
+
+  toJSON() {
+    const { owner, ...game } = this;
+    return {
+      ...game,
+      owner: {
+        id: owner.id,
+        name: owner.fullName,
+      },
+    };
+  }
 }
