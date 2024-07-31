@@ -14,6 +14,8 @@ import styled from 'styled-components';
 import Form from '@/components/Form';
 import SelectInput from '@/components/SelectInput';
 import axios from 'axios';
+import gameServices from '@/services/gameServices';
+import ThreeDotsLoading from '@/components/ThreeDotsLoading';
 
 const DivStyles = styled.div`
   margin-bottom: 1.5rem;
@@ -37,6 +39,7 @@ const NewGame = () => {
     gameTeam: 2,
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -49,44 +52,20 @@ const NewGame = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateInput()) return false;
+    setLoading(true);
 
-    try {
-      const response = await axios.post(
-        'http://127.0.0.1:4000/api/game/create/',
-        {
-          ...formData,
-        },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-      if (response.status === 201) {
-        const { gameCode } = response.data;
-        router.push(`/game/${gameCode}`);
-      }
-    } catch (error) {
-      console.error('Failed to create game:', error);
-      setErrors(error);
+    const response = await gameServices.createGame({
+      formData: { ...formData },
+      setErrors,
+      setLoading,
+    });
+
+    if (response && response.status === 201) {
+      const { gameCode } = response.data;
+      router.push(`/game/waiting/${gameCode}`);
     }
   };
 
-  const validateInput = () => {
-    setErrors({});
-    let isvalid = true;
-    if (!formData.fullname) {
-      setErrors((prev) => {
-        return { ...prev, fullname: 'Name is required' };
-      });
-      isvalid = false;
-    } else if (formData.fullname.length > 15) {
-      setErrors((prev) => {
-        return { ...prev, fullname: 'Name must be at max 15 length' };
-      });
-      isvalid = false;
-    }
-    return isvalid;
-  };
   return (
     <Form>
       <Card>
@@ -155,6 +134,12 @@ const NewGame = () => {
               ]}
               defaultValue={2}
             />
+          </DivStyles>
+          <DivStyles>
+            {loading && <ThreeDotsLoading text={'Creating game'} />}
+          </DivStyles>
+          <DivStyles>
+            {Object.keys(errors).length > 0 && <p>Failed to create game</p>}
           </DivStyles>
         </CardBody>
         <CardFooter>

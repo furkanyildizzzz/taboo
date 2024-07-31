@@ -17,31 +17,6 @@ export async function getStaticProps({ locale }) {
 }
 
 const Home = () => {
-  const [gameCode, setGameCode] = useState('');
-
-  const router = useRouter();
-
-  const createGame = () => {
-    // Generate a unique game code (example: randomly generated code)
-    const newGameCode = generateGameCode();
-    // setGameCode(newGameCode);
-    // Navigate to the new game page with the generated code
-    //router.push(`/game/${newGameCode}`);
-    router.push(`/game/create`);
-  };
-
-  const generateGameCode = () => {
-    // Implement your logic to generate a unique game code here
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const codeLength = 6;
-    let code = '';
-    for (let i = 0; i < codeLength; i++) {
-      code += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return code;
-  };
-
   return (
     <>
       <LanguageSwitcher />
