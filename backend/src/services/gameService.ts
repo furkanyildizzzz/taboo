@@ -7,7 +7,7 @@ import { AppDataSource } from '../data-source';
 import { DatabaseError } from '../types/error/DatabaseError';
 import generateUniqueGameCode from '../util/generateUniqueGameCode';
 export const getAllGames = async (): Promise<Game[]> => {
-  return await gameRepository.find();
+  return await gameRepository.find({ relations: { owner: true } });
 };
 
 export const isGameCodeUnique = async (gameCode: string): Promise<boolean> => {
