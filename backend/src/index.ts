@@ -7,10 +7,26 @@ import playerRoutes from './routes/playerRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { NotFoundError } from './types/error/NotFoundError';
 import cors from 'cors';
+import { createServer } from 'http';
+import { join } from 'path';
+import { Server } from 'socket.io';
 
 dotenv.config(); // Load environment variables from .env file
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+});
 
 // CORS configuration
 app.use(
@@ -33,7 +49,8 @@ app.use('/api/game', gameRoutes);
 app.use('/api/player', playerRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  //const __dirname = dirname(fileURLToPath(import.meta.url));
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
 app.use((req: Request, res: Response, next: NextFunction) =>
@@ -44,7 +61,7 @@ app.use(errorHandler);
 AppDataSource.initialize().then(() => {
   const PORT = process.env.PORT || 4000;
 
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 });
