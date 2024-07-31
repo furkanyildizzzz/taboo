@@ -10,23 +10,13 @@ import cors from 'cors';
 import { createServer } from 'http';
 import { join } from 'path';
 import { Server } from 'socket.io';
+import socketManager from './socketManager';
 
 dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
-  });
-});
 
 // CORS configuration
 app.use(
@@ -60,6 +50,9 @@ app.use(errorHandler);
 
 AppDataSource.initialize().then(() => {
   const PORT = process.env.PORT || 4000;
+
+  // Initialize socket manager
+  socketManager({ io });
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
