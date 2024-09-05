@@ -7,10 +7,16 @@ import playerRoutes from './routes/playerRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { NotFoundError } from './types/error/NotFoundError';
 import cors from 'cors';
+import { createServer } from 'http';
+import { join } from 'path';
+import { Server } from 'socket.io';
+import socketManager from './socketManager';
 
 dotenv.config(); // Load environment variables from .env file
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 // CORS configuration
 app.use(
@@ -33,18 +39,22 @@ app.use('/api/game', gameRoutes);
 app.use('/api/player', playerRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  //const __dirname = dirname(fileURLToPath(import.meta.url));
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
 app.use((req: Request, res: Response, next: NextFunction) =>
-  next(new NotFoundError(req.path)),
+  next(new NotFoundError(`The requested path ${req.path} not found!`)),
 );
 app.use(errorHandler);
 
 AppDataSource.initialize().then(() => {
   const PORT = process.env.PORT || 4000;
 
-  app.listen(PORT, () => {
+  // Initialize socket manager
+  socketManager.init({ io });
+
+  server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 });
