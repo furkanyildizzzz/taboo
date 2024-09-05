@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use((req: Request, res: Response, next: NextFunction) =>
-  next(new NotFoundError(req.path)),
+  next(new NotFoundError(`The requested path ${req.path} not found!`)),
 );
 app.use(errorHandler);
 
@@ -52,7 +52,7 @@ AppDataSource.initialize().then(() => {
   const PORT = process.env.PORT || 4000;
 
   // Initialize socket manager
-  socketManager({ io });
+  socketManager.init({ io });
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
